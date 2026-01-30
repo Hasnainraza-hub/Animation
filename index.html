@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Simple Animation</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+    }
+
+    .box {
+      width: 300px;
+      height: 100px;
+      border: 2px solid #333;
+      position: relative;
+      overflow: hidden;
+      background: white;
+    }
+
+    .circle {
+      width: 50px;
+      height: 50px;
+      background: crimson;
+      border-radius: 50%;
+      position: absolute;
+      top: 25px;
+      left: 0;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <div class="circle" id="circle"></div>
+  </div>
+
+  <button onclick="startAnimation()">Start</button>
+  <button onclick="stopAnimation()">Stop</button>
+
+  <script>
+    let circle = document.getElementById("circle");
+    let position = 0;
+    let direction = 1;
+    let interval;
+
+    function startAnimation() {
+      if (interval) return;
+
+      interval = setInterval(() => {
+        position += 5 * direction;
+
+        if (position >= 250 || position <= 0) {
+          direction *= -1;
+        }
+
+        circle.style.left = position + "px";
+      }, 30);
+    }
+
+    function stopAnimation() {
+      clearInterval(interval);
+      interval = null;
+    }
+  </script>
+
+</body>
+</html>
